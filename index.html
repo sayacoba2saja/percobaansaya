@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Modern</title>
+
+<!-- =======================
+     CSS (INTERNAL STYLE)
+======================== -->
+<style>
+/* -------- RESET -------- */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  background:#eeeeee;
+  color:#222;
+  scroll-behavior:smooth;
+}
+
+/* -------- PRELOADER -------- */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background:rgba(0, 0, 0, 0.836);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 0.6s ease forwards;
+  animation-delay:1.5s;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  animation: cuteLoader 1.2s infinite alternate ease-in-out;
+  background: linear-gradient(135deg, #ff5e79, #ffb0c9);
+}
+
+@keyframes cuteLoader {
+  0% { transform: scale(1) rotate(0); }
+  100% { transform: scale(1.2) rotate(20deg); }
+}
+
+@keyframes fadeOut {
+  to { opacity:0; visibility:hidden; }
+}
+
+/* -------- NAVBAR -------- */
+div {
+  text-align: center;
+}
+div.a {
+  color: #ff0000;
+}
+nav {
+  text-align: center;
+  color: aqua;  
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  padding:5px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(83, 81, 81, 0.555);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  cursor: pointer;
+}
+nav ul {
+  display:flex;
+  gap:30px;
+}
+nav ul li {
+  list-style:none;
+}
+nav ul li a {
+  text-decoration:none;
+  color:#ffffff;
+  font-weight:600;
+  position:relative;
+  transition:0.3s;
+}
+nav ul li a:active {
+  transform:scale(3);
+}
+nav ul li a:hover {
+  color:#ff0033;
+  transform: scale(3);
+}
+nav ul li a::after {
+  content:'';
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:3px;
+  background:#f0eced;
+  border-radius:4px;
+  transition:0.3s;
+}
+
+/* -------- HERO / HOME -------- */
+#home {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMyrpVZo7Psw5cI_hXqFOREzwnrKv8aD_jwqmJIayhqp1N9tb4A_9I-88YiAu9hAU1VJU1hNPV8r9hyD7G9L7GPx72x1ZBVStP7-OMCurmWmUnDhk6ULWoY8azFjIqHHIGZeoJidxAOjOHeG00l_ykIDqwUMAs2Ac0krEZOGOc2YqV32eXOYJx5mDu9Po/w640-h349/WALL2.jpg') center/cover no-repeat fixed;
+  text-align:center;
+  color:rgb(255, 255, 255);
+}
+
+#home h1 {
+  font-size:4rem;
+  font-weight:700;
+  text-shadow:0 0 15px rgba(255, 0, 0, 0.9);
+  animation:fadeDown 1s ease;
+  text-align: center;
+}
+
+#home h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  text-shadow:0 0 15px #5900ff;
+  animation: fadeDown 1s ease;
+  text-align: center;
+}
+
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-40px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* -------- SECTIONS STYLE -------- */
+section { padding:20px 5%; }
+
+/* Animations */
+.fade { opacity:0; transform:translateY(40px); transition:0.8s; }
+.fade.show { opacity:1; transform:translateY(0); }
+
+.slide { opacity:0; transform:translateX(-40px); transition:0.8s; }
+.slide.show { opacity:1; transform:translateX(0); }
+
+.bounce { opacity:0; transform:scale(0.8); transition:0.8s; }
+.bounce.show { opacity:1; transform:scale(1); }
+
+/* -------- PORTFOLIO GRID -------- */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap:25px;
+}
+
+.card {
+  background:#000000;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  transition:0.3s;
+  transform: scale(1);
+  cursor:pointer;
+}
+.card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card .info {
+  padding:18px;
+}
+
+/* -------- FOOTER -------- */
+footer {
+  text-align:center;
+  padding:20px;
+  background:#111;
+  color:white;
+}
+.sidebar {
+  position: absolute;
+  text-align:left;
+  background:#5900ff;
+  color:rgb(0, 0, 0);
+}
+/* -------- LOGO -------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 50px;      /* ubah sesuai ukuran logo */
+  height: 50px;     /* bisa dihapus jika ingin auto */
+  object-fit: contain;
+}
+/* -------- BUTTON -------- */
+button {
+    text-align: left;
+    position: relative;
+    padding: 10px 65px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #ff005500;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
+    
+}
+button ul {
+  display:flex;
+  gap:30px;
+}
+button ul li {
+  list-style:none;
+}
+button ul li a {
+  text-decoration:none;
+  color:#ffffff;
+  font-weight:600;
+  position:relative;
+  transition:0.3s;
+}
+button ul li a:active {
+  transform:scale(1);
+}
+button ul li a:hover {
+  color:#ff0033;
+  transform: scale(5);
+}
+button ul li a::after {
+  content:'';
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:3px;
+  background:#f0eced;
+  border-radius:4px;
+  transition:0.3s;
+}
+button:hover {
+    background: #ff337700;
+    box-shadow: 0 0 10px #ff337700;
+    transform: scale(1.05);
+}
+.glass-btn {
+    padding: 12px 25px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(6px);
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.glass-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+.outline-btn {
+    padding: 10px 20px;
+    border: 2px solid #383838;
+    background: none;
+    color: #000000;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.outline-btn:hover {
+    background: #ff0000;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<!-- =======================
+     PRELOADER
+======================== -->
+<div id="preloader">
+  <div class="loader"></div>
+</div>
+
+<!-- =======================
+     NAVBAR
+======================== -->
+<nav>
+  <div class="logo">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuKg0wmXDKiBBcpKOhJx-eYM4Zx8HEIBpFNkroFocr-rhldYTZUD8I9o2-GpUyc_Ubg3COYy2Tmuwuutnmne1yOwCdlaO-Ha88AnzQO3JsZODw2pAufBWKHHNmUbocE_-mrDiJ1uV5gXDr2rjhXQGshlDbQo4tLSnisT3qCOfefHYatQSsmoZA0dyk-qfF/w400-h400/VEKTOR%20NEW%20LOGO%20(1)PNG.png" alt="Logo">
+  <span style="font-weight:700; font-size: 30px; color: #ff0000; text-shadow: 0 0 15px rgb(255, 255, 255) ;">EJOT SQUAD</span>
+</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- =======================
+     HOME SECTION
+======================== -->
+<section id="home">
+  <h1 class="slide">WELCOME TO EJOT PAGE<i></i></h1>  
+</section>
+
+  
+
+
+<!-- =======================
+     ABOUT
+======================== -->
+<h3 style="color: transparent;">123</h3>
+
+  <button>
+    <h3 style="color: transparent;">12</h3>
+    </button>
+    
+  <button style="text-align: center; background-color: #ff0000;">
+    <ul>
+      <li><a href="#" style="color: #ffffff; " target="_blank" alt="asd"><strong>SUPPORT</strong></a></li>
+    </ul>
+    </button>
+    
+  <button style="text-align: center; background-color: #ffe600;">
+    <ul>
+      <li><a href="#" style="color: #000000;" target="_blank" alt="asd"><strong>EMAIL</strong></a></li>
+    </ul>
+    </button>
+
+  <button style="text-align: center; background-color: #00ff00;">
+    <ul>
+      <li><a href="#" style="color: #9b0000;" target="_blank" alt="asd"><strong>G.FORM</strong></a></li>
+    </ul>
+    </button>
+  
+  <button style="text-align: center; background-color: #0026ff;">
+    <ul>
+      <li><a href="#" style="color: #fffb00;" target="_blank" alt="asd"><strong>SOSMED</strong></a></li>
+    </ul>
+    </button>
+    
+  <button style="text-align: center; background-color: #ff00ff;">
+    <ul>
+      <li><a href="#" style="color: #0011ff;" target="_blank" alt="asd"><strong>PESAN</strong></a></li>
+    </ul>
+    </button>
+
+  
+
+    <section></section>
+
+    <button class="fade" style="align-items: center; border-radius: 0%; font-size: 30px; color: #000000;  background-color: transparent; box-shadow: none; transform: scale(1);">About Me</button>
+    <footer style="background-color: #f30000bb; background-size: 0%; border-radius: 0px; text-align: left;">Saya adalah seorang web developer yang fokus pada desain modern, minimalis, dan responsif.</footer>
+<section></section>
+    
+<!-- =======================
+     PORTFOLIO
+======================== -->
+<section  id="portfolio" style="text-align: center;">
+
+  <p class="slide" style="font-size: 30px; font-weight: bold; color: #ffffff; background: #000000b7;">PAGE</p>
+      <marquee direction="left"   onmouseover="this.stop()" scrollamount="10" behavior="alternate" onmouseout="this.start()">TERIMA KASIH SUDAH BERKUNJUNG</marquee>
+<div style="text-align: center">
+<h3 style="margin: 0 0 10px 0; font-size: 15px; color: rgb(0, 0, 0);"><marquee direction="left"   onmouseover="this.stop()" scrollamount="13" behavior="alternate" onmouseout="this.start()">
+        
+    </h3></marquee>
+      
+  <div class="grid">
+
+    <a href="project1.html" class="card fade" target="_blank">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiRRnOHo-s55BT7DIpwrzKDTlmYBLsJ0UbkFVk7Mc2ETB-JlpYNTfB9C4yWsY3KawywSrRAOmb3Y35zC2y9NqnskxyFDJ38WQOz71MinAkCI2nnc-OzaMfYEpxkyocxHAGh3l-3t8xvZ9FLWPRBtjweBIDTa5-F8pIMVyfZizxihV8IvwrbrVKy87gTns/w640-h640/WALL.jpg" />
+      <div class="info">
+        <h3 style="color: #eeeeee; font-size: 15px;">AKU DAN BINTANG</h3>
+      </div>
+    </a>
+    
+
+    <a href="project2.html" class="card fade">
+      <h3></h3>
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAzWGUm2-Tphs2XUQE-8KwjVOXtSp_5Rbq47eycSAf6BbrHgLn0YDx4cCS1R2iRMWbrKOLgJYrVYCJl02jF8MX7V3fdqpureQ1LdrkXohHZKuYZhVhPMDQBN9DqWQOEE7W7dTkk9pB1c4uwHhQxcEDBWjwx3rh22T-itwNQDZOUczvk7zfZBsAvpQxgtQ/w400-h400/Gemini_Generated_Image_hux8o1hux8o1hux8.png" />
+      <div class="info">
+        <h3></h3>
+      </div>
+    </a>
+
+    <a href="project3.html" class="card fade" target="_blank">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa" target="_blank" />
+      <div class="info">
+        <h3></h3>
+      </div>
+    </a>
+
+  </div>
+</section>
+<footer style="background-color: #ff0000;"> </footer>
+
+
+<!-- =======================
+     CONTACT
+======================== -->
+
+<section id="contact">
+  <h2 class="slide" style="font-size: 25px; font-weight: bold; color: #00666d;" >Kontak</h2>
+  <button class="outline-btn">EMAIL : ejotsquad@email</button>
+  <p class="fade">ejotsquad@email</p>
+</section>
+<!-- =======================
+     FOOTER
+======================== -->
+<footer>
+  <I>©2025 Design byㅤ</I> <a href="#home" style="color: #ff00d4; " alt="FUCKYOU">
+    <strong>EJOT.SQUAD</strong></a>
+  <I>ㅤ — Hak Cipta Dilindungi</I>
+</footer>
+
+<!-- =======================
+     JAVASCRIPT (IN-PAGE)
+======================== -->
+<script>
+// ===== Scroll Animations =====
+const revealElements = document.querySelectorAll(".fade, .slide, .bounce");
+
+function revealOnScroll() {
+  const trigger = window.innerHeight * 0.85;
+
+  revealElements.forEach(el => {
+    const rect = el.getBoundingClientRect().top;
+    if (rect < trigger) el.classList.add("show");
+  });
+}
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+
+// ===== Navbar Click Animation =====
+document.querySelectorAll("nav ul li a").forEach(a => {
+  a.addEventListener("click", () => {
+    a.style.transform = "scale(0.85)";
+    setTimeout(() => (a.style.transform = "scale(1)"), 180);
+  });
+});
+
+// ===== Preloader Timeout =====
+setTimeout(() => {
+  document.getElementById("preloader").style.display = "none";
+}, 1600);
+</script>
+
+</body>
+</html>
